@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  # Санитайзер.
+  bitrix_iblock_element_validator.sanitizer:
+    public: false
+    class: Prokl\BitrixIblockElementValidatorBundle\Services\Sanitizer\SanitizerMaker
+
+  Prokl\BitrixIblockElementValidatorBundle\Services\Contracts\SanitizerInterface: '@bitrix_iblock_element_validator.sanitizer'
+
+  bitrix_iblock_element_validator.initializer:
+    class: Prokl\BitrixIblockElementValidatorBundle\Services\BitrixPropertiesValidator
+    arguments:
+      - !tagged_locator { tag: 'bitrix_iblock_element_validator.custom_validator', index_by: 'key' }
+      - '@bitrix_iblock_element_validator.sanitizer'
+      - '%bitrix_iblock_element_validator.config%'
+    tags: ['service.bootstrap']
+
+  bitrix_iblock_element_validator.unique_validator:
+    class: Prokl\BitrixIblockElementValidatorBundle\Services\BitrixUniquePropertyValidator
+    arguments: ['#FIELD_NAME#: такое значение уже есть в базе', '@bitrix_iblock_element_validator.cblockelement']
+    tags:
+      - { name: bitrix_iblock_element_validator.custom_validator, key: bitrix_iblock_element_validator.unique_validator  }
+
+  bitrix_iblock_element_validator.cblockelement:
+    public: false
+    class: CIBlockElement
