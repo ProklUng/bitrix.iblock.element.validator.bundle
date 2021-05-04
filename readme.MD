@@ -69,6 +69,8 @@ class ExampleCustomValidator extends AbstractBitrixPropertyValidator
 
 ## Конфигурация бандла
 
+Файл `/local/config/packages/bitrix_iblock_element_validator.yaml`.
+
 ```yaml
 bitrix_iblock_element_validator:
   enabled: true
@@ -80,9 +82,9 @@ bitrix_iblock_element_validator:
     ######################################################
     field_email_validator:
       id_iblock: 1
-      sanitize: ''
+      sanitize: '' # Правило санации
       code_property: EMAIL
-      rule: 'required|string|min:12'
+      rule: 'required|string|min:12' # Правило валидации согласно принципам Laravel Validator
       error_message: '#FIELD_NAME#: должна быть строка, не менее двенадцати символов длиной.'
       optional_validator: bitrix_iblock_element_validator.example_custom_validator
 
@@ -90,7 +92,7 @@ bitrix_iblock_element_validator:
       id_iblock: 1
       code_property: Phone
       sanitize: ''
-      rule: 'string|min:5'
+      rule: 'string|min:5' # Правило валидации согласно принципам Laravel Validator
       error_message: '#FIELD_NAME#: должна быть строка, не менее пяти символов длиной.'
       optional_validator: ~
 
