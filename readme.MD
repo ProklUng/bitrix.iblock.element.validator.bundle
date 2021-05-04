@@ -104,5 +104,5 @@ bitrix_iblock_element_validator:
     field_text_validator:
       id_iblock: 1
       code_property: TEXT
-      sanitize: 'trim|escape|strip_tags|cast:string'
+      sanitize: 'trim|escape|strip_tags|cast:string' # Правило санации
 ```
