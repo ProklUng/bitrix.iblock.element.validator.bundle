@@ -66,3 +66,41 @@ class ExampleCustomValidator extends AbstractBitrixPropertyValidator
 ### Валидаторы в комплекте
 
 - `bitrix_iblock_element_validator.unique_validator` - проверка элемента на уникальность. Не дает сохранить значение, которое уже есть в базе для заданного свойства.
+
+## Конфигурация бандла
+
+```yaml
+bitrix_iblock_element_validator:
+  enabled: true
+  iblocks:
+    #####################################################
+    # Определение валидации свойства code_property
+    # инфоблока id_iblock.
+    # optional_validator - опциональный сервис валидации.
+    ######################################################
+    field_email_validator:
+      id_iblock: 1
+      sanitize: ''
+      code_property: EMAIL
+      rule: 'required|string|min:12'
+      error_message: '#FIELD_NAME#: должна быть строка, не менее двенадцати символов длиной.'
+      optional_validator: bitrix_iblock_element_validator.example_custom_validator
+
+    field_phone_validator:
+      id_iblock: 1
+      code_property: Phone
+      sanitize: ''
+      rule: 'string|min:5'
+      error_message: '#FIELD_NAME#: должна быть строка, не менее пяти символов длиной.'
+      optional_validator: ~
+
+    field_email_validator_unique:
+      id_iblock: 1
+      code_property: EMAIL
+      optional_validator: bitrix_iblock_element_validator.unique_validator
+
+    field_text_validator:
+      id_iblock: 1
+      code_property: TEXT
+      sanitize: 'trim|escape|strip_tags|cast:string'
+```
