@@ -21,12 +21,11 @@
     },
     "require": {
         "php": ">=7.1 | 8.0",
-        "symfony/dependency-injection": "^4.0 || ^5.0",
-        "symfony/http-kernel": "^4.0 || ^5.0",
-        "symfony/config": "~4|~5",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/config": "^4.4 || ^5.0",
 	    "waavi/sanitizer": "^1.0",
-        "illuminate/validation": "~6 | ~7",
-        "illuminate/translation": "~6 | ~7"
+        "illuminate/validation": "~6 | ~7 | ~8",
+        "illuminate/translation": "~6 | ~7 | ~8"
     }
-
 }
